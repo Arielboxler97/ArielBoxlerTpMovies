@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('./partials/head') %>
+<body>
+    <div class="col-12 col-md-4">
+      <img class="img-fluid" src="/img/<%= image %>" alt="">
+    </div>
+    <div class="col-12 col-md-8">
+    <ul class="list-group list-group-flush">
+    <h1><%= title %> </h1>    
+    <br>
+    <li class="list-group-item">RATING: <%= rating %> </li>
+    <li class="list-group-item">AWARDS: <%= awards %> </li>
+    <li class="list-group-item">LENGTH: <%= length + ' min'%> </li>
+    <li class="list-group-item">RELEASE DATE: <%= moment(release_date).format('DD/MM/YYYY')  %> </li>
+    <br>
+    </ul>
+</div>
+    <section>
+        <!--Aquí debe colocar los botones de Modificar - Borrar y Listado de Películas-->
+        <div class="col-12">
+            <div class="d-flex justify-content-start">
+                <a class="btn btn-primary" href="/movies/edit/<%= id %>">Editar</a>
+            </div>
+
+        </div>
+
+          <!-- Button trigger modal -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#moviesModal<%= id %>">
+    Eliminar
+   </button>
+   
+   <!-- Modal -->
+   <div class="modal fade" id="moviesModal<%= id %>" tabindex="-1" aria-labelledby="moviesModalLabel<%= id %>" aria-hidden="true">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h1 class="modal-title fs-5" id="moviesModalLabel<%= id %>">advertencia</h1>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+           <p>¿seguro quiere eliminar esta pelicula <b><%= title %></b>?</p>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+           <form action="/movies/delete/<%= id %>?_method=DELETE" method="POST">
+           <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+         </div>
+       </div>
+     </div>
+   </div>
+    </section>
+
+</body>
+</html>
